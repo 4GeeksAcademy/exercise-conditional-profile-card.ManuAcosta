@@ -37,7 +37,7 @@ function render(variables = {}) {
     "Apellido"}</h1>
           <h2>${variables.role || "Tu Rol"}</h2>
           <h3>${variables.city || "Ciudad"}, ${variables.country || "País"}</h3>
-          <ul class="${variables.socialMediaPosition || "position-right"}">
+          <ul class="position-${variables.socialMediaPosition || "right"}">
             ${
               variables.twitter
                 ? `<li><a href="https://twitter.com/${variables.twitter}"><i class="fab fa-twitter"></i></a></li>`
@@ -70,7 +70,7 @@ window.onload = function() {
     includeCover: true,
     background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da",
     avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
-    socialMediaPosition: "position-right",
+    socialMediaPosition: "right",
     twitter: null,
     github: null,
     linkedin: null,
@@ -90,10 +90,9 @@ window.onload = function() {
     el.addEventListener("change", function(e) {
       const key = el.getAttribute("for");
       let value = el.value;
-      // Convertir a boolean si es includeCover
-      if (key === "includeCover") value = value === "true";
-      // Si es vacío, poner null
-      if (value === "") value = null;
+      // Usar operadores ternarios para procesar el valor
+      value = key === "includeCover" ? value === "true" : value;
+      value = value === "" ? null : value;
       variables[key] = value;
       render(variables);
     });
